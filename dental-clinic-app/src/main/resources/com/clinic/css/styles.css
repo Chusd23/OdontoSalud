@@ -1,0 +1,275 @@
+/* =========================================================
+   SonrisaClinic — estilos sobre el tema base AtlantaFX PrimerLight
+   ========================================================= */
+
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -color-accent-fg: #2f6fed;
+    -color-accent-emphasis: #2f6fed;
+    -fx-background-color: #f5f7fb;
+}
+
+/* ---------- LOGIN ---------- */
+.login-root {
+    -fx-background-color: linear-gradient(to bottom right, #eef2fb, #f7f9fc);
+}
+
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 18;
+    -fx-effect: dropshadow(gaussian, rgba(20,30,60,0.12), 28, 0.15, 0, 8);
+}
+
+.login-icon {
+    -fx-icon-color: #2f6fed;
+}
+
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1a2233;
+}
+
+.login-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7c8494;
+}
+
+.login-form {
+    -fx-pref-width: 300;
+}
+
+.login-field {
+    -fx-background-radius: 10;
+    -fx-padding: 10 12;
+    -fx-font-size: 13px;
+}
+
+.hint-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #9aa2b1;
+    -fx-padding: 6 0 0 0;
+}
+
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #d64545;
+    -fx-padding: 2 0 2 0;
+}
+
+.success-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #1f9d55;
+    -fx-padding: 2 0 2 0;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+    -fx-background-color: #171d2b;
+}
+
+.brand-box {
+    -fx-padding: 4 6;
+}
+
+.brand-icon {
+    -fx-icon-color: #6ea1ff;
+}
+
+.brand-label {
+    -fx-font-size: 17px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+}
+
+.sidebar-separator .line {
+    -fx-border-color: #2a3348;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c4c9d6;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 12;
+    -fx-background-radius: 10;
+    -fx-graphic-text-gap: 10;
+    -fx-max-width: Infinity;
+    -fx-cursor: hand;
+}
+
+.nav-button .ikonli-font-icon {
+    -fx-icon-color: #8891a5;
+    -fx-icon-size: 16;
+}
+
+.nav-button:hover {
+    -fx-background-color: #232b3f;
+    -fx-text-fill: white;
+}
+
+.nav-button-active {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+}
+
+.nav-button-active .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.logout-button {
+    -fx-text-fill: #e29797;
+}
+
+.logout-button .ikonli-font-icon {
+    -fx-icon-color: #e29797;
+}
+
+.user-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #8891a5;
+    -fx-padding: 4 6 10 6;
+    -fx-wrap-text: true;
+}
+
+/* ---------- CONTENIDO ---------- */
+.content-area {
+    -fx-background-color: #f5f7fb;
+}
+
+.view-scroll {
+    -fx-background-color: transparent;
+}
+
+.view-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.view-container {
+    -fx-background-color: transparent;
+}
+
+.view-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1a2233;
+}
+
+.view-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7c8494;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(20,30,60,0.06), 18, 0.1, 0, 4);
+}
+
+.card-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1a2233;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #4b5468;
+}
+
+.search-icon {
+    -fx-icon-color: #9aa2b1;
+    -fx-icon-size: 16;
+}
+
+/* ---------- BOTONES ---------- */
+.accent-button {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+
+.accent-button .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.accent-button:hover {
+    -fx-background-color: #2559c7;
+}
+
+.secondary-button {
+    -fx-background-color: #eef1f7;
+    -fx-text-fill: #4b5468;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #e1e5ee;
+}
+
+/* ---------- TABLAS ---------- */
+.modern-table {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
+}
+
+.modern-table .column-header-background {
+    -fx-background-color: #f5f7fb;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.modern-table .column-header .label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #7c8494;
+}
+
+.modern-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #eef1f7 transparent;
+}
+
+.modern-table .table-row-cell:selected {
+    -fx-background-color: #eaf1ff;
+}
+
+.modern-table .table-row-cell:hover {
+    -fx-background-color: #f7f9fc;
+}
+
+.modern-table .table-cell {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #2c3345;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* ---------- TABS ---------- */
+.modern-tabs .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.modern-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.modern-tabs .tab:selected {
+    -fx-background-color: #eaf1ff;
+}
+
+.modern-tabs .tab-label {
+    -fx-font-size: 12.5px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #4b5468;
+}

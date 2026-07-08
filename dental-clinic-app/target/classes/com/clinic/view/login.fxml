@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.controller.LoginController"
+            styleClass="login-root">
+
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" maxWidth="380" spacing="6" styleClass="login-card">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+
+                <ImageView fitWidth="180" fitHeight="180" preserveRatio="true">
+				    <image>
+				        <Image url="@/com/clinic/images/logo.jpeg"/>
+				    </image>
+				</ImageView>
+
+
+                <Label text="Sistema de gestión odontológica" styleClass="login-subtitle"/>
+
+                <VBox spacing="14" styleClass="login-form">
+                    <padding>
+                        <Insets top="24"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Usuario" styleClass="field-label"/>
+                        <TextField fx:id="usernameField" promptText="Ej: admin" styleClass="login-field"/>
+                    </VBox>
+
+                    <VBox spacing="4">
+                        <Label text="Contraseña" styleClass="field-label"/>
+                        <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="login-field"/>
+                    </VBox>
+
+                    <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false"/>
+
+                    <Button text="Iniciar sesión" onAction="#handleLogin" defaultButton="true"
+                            styleClass="accent-button" maxWidth="Infinity"/>
+
+                    <Label text="Usuarios demo: admin / admin123  ·  recepcion / 1234"
+                           styleClass="hint-label" wrapText="true"/>
+                </VBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

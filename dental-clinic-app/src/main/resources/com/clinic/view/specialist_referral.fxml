@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane fitToWidth="true" styleClass="view-scroll"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.controller.SpecialistReferralController">
+    <VBox spacing="20" styleClass="view-container">
+        <padding>
+            <Insets top="28" right="32" bottom="28" left="32"/>
+        </padding>
+
+        <VBox spacing="2">
+            <Label text="Solicitud con especialista" styleClass="view-title"/>
+            <Label text="Remite a un paciente con un especialista externo o interno" styleClass="view-subtitle"/>
+        </VBox>
+
+        <VBox styleClass="card" spacing="16">
+            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+            <VBox spacing="4">
+                <Label text="Paciente *" styleClass="field-label"/>
+                <ComboBox fx:id="patientCombo" maxWidth="Infinity" promptText="Selecciona un paciente..."/>
+            </VBox>
+
+            <GridPane hgap="16" vgap="14">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+
+                <VBox spacing="4" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                    <Label text="Especialidad *" styleClass="field-label"/>
+                    <ComboBox fx:id="specialtyCombo" maxWidth="Infinity" promptText="Selecciona..." editable="true"/>
+                </VBox>
+                <VBox spacing="4" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                    <Label text="Nombre del especialista" styleClass="field-label"/>
+                    <TextField fx:id="specialistNameField" promptText="Ej: Dr. Felipe Cárdenas"/>
+                </VBox>
+
+                <VBox spacing="4" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                    <Label text="Fecha de la solicitud *" styleClass="field-label"/>
+                    <DatePicker fx:id="dateField" maxWidth="Infinity"/>
+                </VBox>
+                <VBox spacing="4" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                    <Label text="Estado" styleClass="field-label"/>
+                    <ComboBox fx:id="statusCombo" maxWidth="Infinity" promptText="Selecciona..."/>
+                </VBox>
+
+                <VBox spacing="4" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                    <Label text="Motivo de la remisión" styleClass="field-label"/>
+                    <TextArea fx:id="reasonField" prefRowCount="3" wrapText="true" promptText="Ej: Evaluación para tratamiento de ortodoncia"/>
+                </VBox>
+            </GridPane>
+
+            <Label fx:id="statusLabel" styleClass="hint-label" visible="false" managed="false"/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Limpiar" onAction="#handleClear" styleClass="secondary-button"/>
+                <Button text="Enviar solicitud" onAction="#handleSave" styleClass="accent-button">
+                    <graphic><FontIcon iconLiteral="fth-send"/></graphic>
+                </Button>
+            </HBox>
+        </VBox>
+
+        <VBox styleClass="card" spacing="12">
+            <padding><Insets top="20" right="22" bottom="22" left="22"/></padding>
+            <Label text="Solicitudes registradas" styleClass="card-title"/>
+            <TableView fx:id="referralsTable" styleClass="modern-table" prefHeight="260">
+                <columns>
+                    <TableColumn fx:id="colPatient" text="Paciente" prefWidth="200"/>
+                    <TableColumn fx:id="colSpecialty" text="Especialidad" prefWidth="150"/>
+                    <TableColumn fx:id="colSpecialist" text="Especialista" prefWidth="170"/>
+                    <TableColumn fx:id="colDate" text="Fecha" prefWidth="110"/>
+                    <TableColumn fx:id="colStatus" text="Estado" prefWidth="110"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </VBox>
+</ScrollPane>
