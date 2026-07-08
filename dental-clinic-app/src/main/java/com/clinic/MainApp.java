@@ -27,7 +27,7 @@ public class MainApp extends Application {
                 MainApp.class.getResource("css/styles.css")).toExternalForm());
 
         stage.setScene(scene);
-        stage.setTitle("SonrisaClinic - Consultorio Odontológico");
+        stage.setTitle("OdontoSalud - Consultorio Odontológico");
         stage.getIcons().add(new Image(Objects.requireNonNull(
                 MainApp.class.getResourceAsStream("images/icono.JPG"))));
         stage.setMinWidth(960);
