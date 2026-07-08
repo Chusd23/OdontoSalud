@@ -50,7 +50,7 @@ public class MainController {
     public void handleLogout() {
         DataStore.getInstance().setCurrentUser(null);
         try {
-            MainApp.setRoot("view/login.fxml", "SonrisaClinic - Consultorio Odontológico");
+            MainApp.setRoot("view/login.fxml", "OdontoSalud - Consultorio Odontológico");
         } catch (IOException e) {
             e.printStackTrace();
         }
