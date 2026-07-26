@@ -32,7 +32,8 @@ public class ProfessionalRegisterController {
         docTypeCombo.setItems(FXCollections.observableArrayList("CC", "CE", "PA"));
         specialtyCombo.setItems(FXCollections.observableArrayList(
                 "Odontología General", "Ortodoncia", "Endodoncia", "Periodoncia",
-                "Cirugía Oral y Maxilofacial", "Odontopediatría", "Rehabilitación Oral"));
+                "Cirugía Oral y Maxilofacial", "Odontopediatría", "Rehabilitación Oral",
+                "Auxiliar Administrativo","Auxiliar Odontológico"));
         FieldFormatters.numericOnly(docNumberField, 15);
 
         colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));

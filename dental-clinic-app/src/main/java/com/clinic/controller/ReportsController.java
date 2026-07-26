@@ -58,7 +58,14 @@ public class ReportsController {
 
         if (from == null || to == null || from.isAfter(to)) {
             showStatus("Selecciona un rango de fechas válido.", true);
+            resetReportData();
             return;
+        }
+        if (to.isBefore(from)){
+        	resetReportData();
+        	showStatus("La fecha final del reporte debe ser mayor que la inicial.",true);
+        	return;
+        
         }
 
         ObservableList<Patient> patients = DataStore.getInstance().getPatients();
@@ -103,10 +110,26 @@ public class ReportsController {
         } else {
             showStatus("Reporte generado para el periodo " + from + " a " + to + ".", false);
         }
+
     }
+    private void resetReportData() {
+        totalPatientsLabel.setText("0");
+        totalProceduresLabel.setText("0");
+        totalRevenueLabel.setText(java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("es", "CO")).format(0));
+        lastAgeRanges = new LinkedHashMap<>();
+        lastTreatments = new LinkedHashMap<>();
+        ageRangeTable.setItems(FXCollections.observableArrayList());
+        treatmentsTable.setItems(FXCollections.observableArrayList());
+    }   
 
     @FXML
     private void handleDownload() {
+    	if (fromDatePicker.getValue() == null || toDatePicker.getValue() == null
+    	        || toDatePicker.getValue().isBefore(fromDatePicker.getValue())) {
+    	    resetReportData();
+    	    showStatus("La fecha final del reporte debe ser mayor que la inicial.", true);
+    	    return;
+    	}
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Guardar reporte");
         chooser.setInitialFileName("reporte_odontosalud.csv");
@@ -114,8 +137,11 @@ public class ReportsController {
         var file = chooser.showSaveDialog(totalPatientsLabel.getScene().getWindow());
         if (file == null) return;
 
-        try (FileWriter fw = new FileWriter(file)) {
+        try (java.io.OutputStreamWriter fw = new java.io.OutputStreamWriter(
+                new java.io.FileOutputStream(file), java.nio.charset.StandardCharsets.UTF_8)) {
+            fw.write('\uFEFF'); // BOM para que Excel detecte UTF-8 correctamente
             fw.write("Reporte OdontoSalud\n");
+            fw.write("Periodo," + fromDatePicker.getValue() + " a " + toDatePicker.getValue() + "\n\n");
             fw.write("Total pacientes," + totalPatientsLabel.getText() + "\n");
             fw.write("Total tratamientos en periodo," + totalProceduresLabel.getText() + "\n");
             fw.write("Ingresos en periodo," + totalRevenueLabel.getText() + "\n\n");

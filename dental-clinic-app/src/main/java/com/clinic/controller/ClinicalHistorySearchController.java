@@ -170,10 +170,13 @@ public class ClinicalHistorySearchController {
                 ? java.time.Period.between(patient.getBirthDate(), java.time.LocalDate.now()).getYears() + " años"
                 : "Edad no registrada";
         patientSubHeaderLabel.setText(patient.getDocType() + " " + patient.getDocNumber()
-                + "  ·  " + age
-                + "  ·  Grupo sanguíneo: " + (patient.getBloodType() != null ? patient.getBloodType() : "N/A")
-                + "  ·  Alergias: " + (patient.getAllergies() == null || patient.getAllergies().isBlank()
-                    ? "Ninguna reportada" : patient.getAllergies()));
+		        + "  ·  " + age
+		        + "  ·  " + (patient.getGender() != null && !patient.getGender().isBlank() ? patient.getGender() : "Género no registrado")
+		        + "  ·  Tel: " + (patient.getPhone() != null && !patient.getPhone().isBlank() ? patient.getPhone() : "N/A")
+		        + "  ·  Dirección: " + (patient.getAddress() != null && !patient.getAddress().isBlank() ? patient.getAddress() : "N/A")
+		        + "  ·  Grupo sanguíneo: " + (patient.getBloodType() != null ? patient.getBloodType() : "N/A")
+		        + "  ·  Alergias: " + (patient.getAllergies() == null || patient.getAllergies().isBlank()
+		            ? "Ninguna reportada" : patient.getAllergies()));
 
         // HU09: alerta médica visible de forma prioritaria antes que cualquier otro dato.
         if (patient.getMedicalAlerts() != null && !patient.getMedicalAlerts().isBlank()) {
