@@ -23,12 +23,18 @@ public class DataStore {
     private final ObservableList<SpecialistReferral> referrals = FXCollections.observableArrayList();
     private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     private final ObservableList<Payment> payments = FXCollections.observableArrayList();
+    private final ObservableList<Professional> professionals = FXCollections.observableArrayList();
+    private final ObservableList<Diagnosis> diagnoses = FXCollections.observableArrayList();
+    private final ObservableList<ChangeLogEntry> changeLog = FXCollections.observableArrayList();
 
     private final AtomicInteger patientIdSeq = new AtomicInteger(1);
     private final AtomicInteger procedureIdSeq = new AtomicInteger(1);
     private final AtomicInteger referralIdSeq = new AtomicInteger(1);
     private final AtomicInteger appointmentIdSeq = new AtomicInteger(1);
     private final AtomicInteger paymentIdSeq = new AtomicInteger(1);
+    private final AtomicInteger professionalIdSeq = new AtomicInteger(1);
+    private final AtomicInteger diagnosisIdSeq = new AtomicInteger(1);
+    private final AtomicInteger changeLogIdSeq = new AtomicInteger(1);
 
     private User currentUser;
 
@@ -39,6 +45,8 @@ public class DataStore {
         seedReferrals();
         seedAppointments();
         seedPayments();
+        seedProfessionals();
+        seedDiagnoses();
     }
 
     // ---------- SESIÓN ----------
@@ -60,10 +68,31 @@ public class DataStore {
     public Patient addPatient(String names, String lastNames, String docType, String docNumber,
                                LocalDate birthDate, String gender, String phone, String email,
                                String address, String bloodType, String allergies) {
+        return addPatient(names, lastNames, docType, docNumber, birthDate, gender, phone, email,
+                address, bloodType, allergies, "");
+    }
+
+    public Patient addPatient(String names, String lastNames, String docType, String docNumber,
+                               LocalDate birthDate, String gender, String phone, String email,
+                               String address, String bloodType, String allergies, String medicalAlerts) {
         Patient p = new Patient(patientIdSeq.getAndIncrement(), names, lastNames, docType, docNumber,
-                birthDate, gender, phone, email, address, bloodType, allergies);
+                birthDate, gender, phone, email, address, bloodType, allergies, medicalAlerts);
         patients.add(p);
         return p;
+    }
+
+    /** Registra un cambio en la historia clínica de un paciente (HU12). */
+    public void logPatientChange(int patientId, String field, String oldValue, String newValue) {
+        String user = currentUser != null ? currentUser.getFullName() : "Sistema";
+        changeLog.add(new ChangeLogEntry(changeLogIdSeq.getAndIncrement(), patientId, field,
+                oldValue == null || oldValue.isBlank() ? "-" : oldValue,
+                newValue == null || newValue.isBlank() ? "-" : newValue, user));
+    }
+
+    public ObservableList<ChangeLogEntry> getChangeLogForPatient(int patientId) {
+        ObservableList<ChangeLogEntry> result = FXCollections.observableArrayList();
+        for (ChangeLogEntry c : changeLog) if (c.getPatientId() == patientId) result.add(c);
+        return result;
     }
 
     public ObservableList<Patient> searchPatients(String query) {
@@ -166,6 +195,45 @@ public class DataStore {
         return null;
     }
 
+    public ObservableList<Appointment> getAppointmentsByDate(LocalDate date) {
+        ObservableList<Appointment> result = FXCollections.observableArrayList();
+        for (Appointment a : appointments) if (date.equals(a.getDate())) result.add(a);
+        return result;
+    }
+
+    // ---------- PROFESIONALES ----------
+    public ObservableList<Professional> getProfessionals() { return professionals; }
+
+    public boolean professionalExists(String docNumber) {
+        for (Professional p : professionals) if (p.getDocNumber().equals(docNumber)) return true;
+        return false;
+    }
+
+    public Professional addProfessional(String names, String lastNames, String docType, String docNumber,
+                                         String specialty, String licenseNumber, String phone, String email) {
+        Professional p = new Professional(professionalIdSeq.getAndIncrement(), names, lastNames, docType,
+                docNumber, specialty, licenseNumber, phone, email);
+        professionals.add(p);
+        return p;
+    }
+
+    // ---------- DIAGNÓSTICOS ----------
+    public ObservableList<Diagnosis> getDiagnoses() { return diagnoses; }
+
+    public Diagnosis addDiagnosis(int patientId, String pathology, String tooth, String severity,
+                                   LocalDate date, String dentist, String notes) {
+        Diagnosis d = new Diagnosis(diagnosisIdSeq.getAndIncrement(), patientId, pathology, tooth,
+                severity, date, dentist, notes);
+        diagnoses.add(d);
+        return d;
+    }
+
+    public ObservableList<Diagnosis> getDiagnosesForPatient(int patientId) {
+        ObservableList<Diagnosis> result = FXCollections.observableArrayList();
+        for (Diagnosis d : diagnoses) if (d.getPatientId() == patientId) result.add(d);
+        return result;
+    }
+
     // ---------- DATOS DE EJEMPLO ----------
     private void seedUsers() {
         users.add(new User("admin", "admin123", "Dra. Maria Elena Bernal", "Administrador"));
@@ -178,9 +246,23 @@ public class DataStore {
                 "O+", "Ninguna");
         addPatient("María Fernanda", "Gómez Ruiz", "CC", "43987654", LocalDate.of(1985, 9, 3),
                 "Femenino", "3109876543", "maria.gomez@mail.com", "Cra 80 #34-21, Medellín",
-                "A+", "Penicilina");
+                "A+", "Penicilina", "Hipertensión arterial - Precaución con anestesia con epinefrina");
         addPatient("Santiago", "Zapata Uribe", "TI", "10893456", LocalDate.of(2012, 1, 20),
-                "Masculino", "3204567890", "-", "Cl 10 #45-67, Envigado", "B+", "Ninguna");
+                "Masculino", "3204567890", "-", "Cl 10 #45-67, Envigado", "B+", "Ninguna", "");
+    }
+
+    private void seedProfessionals() {
+        addProfessional("Andrés", "Torres Salazar", "CC", "71234567", "Odontología General",
+                "TP-11234", "3012223344", "andres.torres@odontosalud.com");
+        addProfessional("Camila", "Restrepo Vélez", "CC", "43678912", "Endodoncia",
+                "TP-11987", "3013334455", "camila.restrepo@odontosalud.com");
+    }
+
+    private void seedDiagnoses() {
+        addDiagnosis(1, "Caries dental", "16", "Moderada", LocalDate.now().minusMonths(1),
+                "Dr. Andrés Torres", "Caries oclusal detectada en control de rutina.");
+        addDiagnosis(2, "Pulpitis irreversible", "24", "Severa", LocalDate.now().minusDays(20),
+                "Dra. Camila Restrepo", "Requiere tratamiento de conducto.");
     }
 
     private void seedProcedures() {

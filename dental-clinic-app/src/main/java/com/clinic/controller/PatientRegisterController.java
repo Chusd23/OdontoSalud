@@ -22,6 +22,7 @@ public class PatientRegisterController {
     @FXML private TextField addressField;
     @FXML private ComboBox<String> bloodTypeCombo;
     @FXML private TextArea allergiesField;
+    @FXML private TextArea medicalAlertsField;
     @FXML private Label statusLabel;
 
     @FXML private TableView<Patient> patientsTable;
@@ -71,7 +72,8 @@ public class PatientRegisterController {
                 emailField.getText().trim(),
                 addressField.getText().trim(),
                 bloodTypeCombo.getValue(),
-                allergiesField.getText().trim()
+                allergiesField.getText().trim(),
+                medicalAlertsField.getText().trim()
         );
 
         showStatus("Paciente registrado correctamente.", false);

@@ -57,6 +57,22 @@
                         styleClass="nav-button">
                     <graphic><FontIcon iconLiteral="fth-dollar-sign"/></graphic>
                 </Button>
+                <Button fx:id="navProfessionals" text="Profesionales" onAction="#showProfessionals"
+                        styleClass="nav-button">
+                    <graphic><FontIcon iconLiteral="fth-user-check"/></graphic>
+                </Button>
+                <Button fx:id="navCalendar" text="Recordatorio de citas" onAction="#showCalendar"
+                        styleClass="nav-button">
+                    <graphic><FontIcon iconLiteral="fth-bell"/></graphic>
+                </Button>
+                <Button fx:id="navDiagnosis" text="Diagnósticos" onAction="#showDiagnosis"
+                        styleClass="nav-button">
+                    <graphic><FontIcon iconLiteral="fth-activity"/></graphic>
+                </Button>
+                <Button fx:id="navReports" text="Reportes" onAction="#showReports"
+                        styleClass="nav-button">
+                    <graphic><FontIcon iconLiteral="fth-bar-chart-2"/></graphic>
+                </Button>
             </VBox>
 
             <Region VBox.vgrow="ALWAYS"/>

@@ -15,11 +15,19 @@ public class Patient {
     private String address;
     private String bloodType;
     private String allergies;
+    private String medicalAlerts;
     private final LocalDate registrationDate;
 
     public Patient(int id, String names, String lastNames, String docType, String docNumber,
                     LocalDate birthDate, String gender, String phone, String email,
                     String address, String bloodType, String allergies) {
+        this(id, names, lastNames, docType, docNumber, birthDate, gender, phone, email,
+                address, bloodType, allergies, "");
+    }
+
+    public Patient(int id, String names, String lastNames, String docType, String docNumber,
+                    LocalDate birthDate, String gender, String phone, String email,
+                    String address, String bloodType, String allergies, String medicalAlerts) {
         this.id = id;
         this.names = names;
         this.lastNames = lastNames;
@@ -32,6 +40,7 @@ public class Patient {
         this.address = address;
         this.bloodType = bloodType;
         this.allergies = allergies;
+        this.medicalAlerts = medicalAlerts;
         this.registrationDate = LocalDate.now();
     }
 
@@ -48,7 +57,15 @@ public class Patient {
     public String getAddress() { return address; }
     public String getBloodType() { return bloodType; }
     public String getAllergies() { return allergies; }
+    public String getMedicalAlerts() { return medicalAlerts; }
     public LocalDate getRegistrationDate() { return registrationDate; }
+
+    public void setPhone(String phone) { this.phone = phone; }
+    public void setEmail(String email) { this.email = email; }
+    public void setAddress(String address) { this.address = address; }
+    public void setBloodType(String bloodType) { this.bloodType = bloodType; }
+    public void setAllergies(String allergies) { this.allergies = allergies; }
+    public void setMedicalAlerts(String medicalAlerts) { this.medicalAlerts = medicalAlerts; }
 
     @Override
     public String toString() {

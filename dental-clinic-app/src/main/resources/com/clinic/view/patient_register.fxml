@@ -87,6 +87,11 @@
                     <Label text="Alergias / antecedentes relevantes" styleClass="field-label"/>
                     <TextArea fx:id="allergiesField" promptText="Ej: Alergia a la penicilina" prefRowCount="2" wrapText="true"/>
                 </VBox>
+
+                <VBox spacing="4" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                    <Label text="Alertas médicas críticas" styleClass="field-label"/>
+                    <TextArea fx:id="medicalAlertsField" promptText="Ej: Diabetes, hipertensión, anticoagulantes (se resalta al abrir la historia clínica y las citas)" prefRowCount="2" wrapText="true"/>
+                </VBox>
             </GridPane>
 
             <Label fx:id="statusLabel" styleClass="hint-label" visible="false" managed="false"/>

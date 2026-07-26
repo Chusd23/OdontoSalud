@@ -23,13 +23,18 @@ public class MainController {
     @FXML private Button navReferral;
     @FXML private Button navAppointments;
     @FXML private Button navPayments;
+    @FXML private Button navProfessionals;
+    @FXML private Button navCalendar;
+    @FXML private Button navDiagnosis;
+    @FXML private Button navReports;
 
     private List<Button> navButtons;
 
     @FXML
     public void initialize() {
         navButtons = List.of(navPatientRegister, navHistorySearch, navProcedures,
-                navReferral, navAppointments, navPayments);
+                navReferral, navAppointments, navPayments, navProfessionals,
+                navCalendar, navDiagnosis, navReports);
 
         var user = DataStore.getInstance().getCurrentUser();
         if (user != null) {
@@ -45,6 +50,10 @@ public class MainController {
     @FXML public void showReferral() { loadView("view/specialist_referral.fxml", navReferral); }
     @FXML public void showAppointments() { loadView("view/appointment.fxml", navAppointments); }
     @FXML public void showPayments() { loadView("view/payment.fxml", navPayments); }
+    @FXML public void showProfessionals() { loadView("view/professional_register.fxml", navProfessionals); }
+    @FXML public void showCalendar() { loadView("view/appointment_calendar.fxml", navCalendar); }
+    @FXML public void showDiagnosis() { loadView("view/diagnosis_register.fxml", navDiagnosis); }
+    @FXML public void showReports() { loadView("view/reports.fxml", navReports); }
 
     @FXML
     public void handleLogout() {

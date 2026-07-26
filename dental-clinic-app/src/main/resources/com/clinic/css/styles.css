@@ -254,7 +254,86 @@
     -fx-alignment: CENTER_LEFT;
 }
 
-/* ---------- TABS ---------- */
+/* ---------- ALERTAS MÉDICAS (HU09) ---------- */
+.medical-alert-banner {
+    -fx-background-color: #fdecea;
+    -fx-text-fill: #b02a1f;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 10;
+    -fx-padding: 12 16;
+    -fx-border-color: #f3b5ae;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+/* ---------- EDICIÓN DE HISTORIA CLÍNICA (HU12) ---------- */
+.edit-box {
+    -fx-background-color: #f7f9fc;
+    -fx-background-radius: 12;
+    -fx-border-color: #e1e5ee;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+/* ---------- CALENDARIO DE CITAS (HU08) ---------- */
+.calendar-header-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #7c8494;
+    -fx-alignment: center;
+}
+
+.calendar-day {
+    -fx-background-color: #f7f9fc;
+    -fx-background-radius: 10;
+    -fx-padding: 8 4;
+    -fx-cursor: hand;
+    -fx-min-height: 60;
+}
+
+.calendar-day:hover {
+    -fx-background-color: #eef1f7;
+}
+
+.calendar-day-number {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #2c3345;
+}
+
+.calendar-day-today {
+    -fx-border-color: #2f6fed;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+.calendar-day-has-appt {
+    -fx-background-color: #eaf1ff;
+}
+
+.calendar-day-badge {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 8;
+    -fx-padding: 2 6;
+}
+
+.calendar-day-selected {
+    -fx-background-color: #2f6fed;
+}
+
+.calendar-day-selected .calendar-day-number {
+    -fx-text-fill: white;
+}
+
+.appt-detail-box {
+    -fx-background-color: #f7f9fc;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+}
 .modern-tabs .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
 }
