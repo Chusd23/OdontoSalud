@@ -35,6 +35,7 @@ public class ProfessionalRegisterController {
                 "Cirugía Oral y Maxilofacial", "Odontopediatría", "Rehabilitación Oral",
                 "Auxiliar Administrativo","Auxiliar Odontológico"));
         FieldFormatters.numericOnly(docNumberField, 15);
+        FieldFormatters.numericOnly(phoneField, 10);
 
         colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colDoc.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(

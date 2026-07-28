@@ -45,7 +45,7 @@
 
                 <VBox spacing="4" GridPane.rowIndex="0" GridPane.columnIndex="0">
                     <Label text="Procedimiento *" styleClass="field-label"/>
-                    <TextField fx:id="procedureNameField" promptText="Ej: Resina compuesta"/>
+                    <ComboBox fx:id="procedureNameCombo" maxWidth="Infinity" promptText="Selecciona o escribe..." editable="true"/>
                 </VBox>
                 <VBox spacing="4" GridPane.rowIndex="0" GridPane.columnIndex="1">
                     <Label text="Pieza dental" styleClass="field-label"/>

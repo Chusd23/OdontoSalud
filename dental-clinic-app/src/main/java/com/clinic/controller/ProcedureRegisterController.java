@@ -12,11 +12,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
+import com.clinic.util.FieldFormatters;
 public class ProcedureRegisterController {
 
     @FXML private ComboBox<Patient> patientCombo;
-    @FXML private TextField procedureNameField;
+    @FXML private ComboBox<String> procedureNameCombo;
     @FXML private TextField toothField;
     @FXML private DatePicker dateField;
     @FXML private TextField dentistField;
@@ -40,6 +40,11 @@ public class ProcedureRegisterController {
     public void initialize() {
         patientCombo.setItems(DataStore.getInstance().getPatients());
         statusCombo.setItems(FXCollections.observableArrayList("Pendiente", "En proceso", "Realizado"));
+        procedureNameCombo.setItems(FXCollections.observableArrayList(
+                "Resina compuesta", "Limpieza dental", "Extracción simple", "Extracción quirúrgica",
+                "Endodoncia", "Corona dental", "Blanqueamiento", "Sellante", "Ortodoncia - control",
+                "Profilaxis", "Aplicación de flúor"));
+        FieldFormatters.decimalOnly(costField);
         dateField.setValue(java.time.LocalDate.now());
 
         colPatient.setCellValueFactory(d -> {
@@ -58,7 +63,7 @@ public class ProcedureRegisterController {
 
     @FXML
     private void handleSave() {
-        if (patientCombo.getValue() == null || procedureNameField.getText().isBlank() || dateField.getValue() == null) {
+    	if (patientCombo.getValue() == null || procedureNameCombo.getValue() == null || procedureNameCombo.getValue().isBlank() || dateField.getValue() == null) {
             showStatus("Selecciona el paciente e indica el procedimiento y la fecha.", true);
             return;
         }
@@ -75,7 +80,7 @@ public class ProcedureRegisterController {
 
         DataStore.getInstance().addProcedure(
                 patientCombo.getValue().getId(),
-                procedureNameField.getText().trim(),
+                procedureNameCombo.getValue().trim(),
                 toothField.getText().isBlank() ? "-" : toothField.getText().trim(),
                 dateField.getValue(),
                 dentistField.getText().trim(),
@@ -90,7 +95,7 @@ public class ProcedureRegisterController {
 
     @FXML
     private void handleClear() {
-        procedureNameField.clear();
+    	procedureNameCombo.setValue(null);
         toothField.clear();
         dateField.setValue(java.time.LocalDate.now());
         dentistField.clear();

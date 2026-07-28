@@ -13,7 +13,7 @@ import javafx.util.StringConverter;
 import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
+import com.clinic.util.FieldFormatters;
 public class PaymentController {
 
     @FXML private ComboBox<Appointment> appointmentCombo;
@@ -36,16 +36,17 @@ public class PaymentController {
     @FXML
     public void initialize() {
         methodCombo.setItems(FXCollections.observableArrayList("Efectivo", "Tarjeta", "Transferencia"));
-
+        FieldFormatters.decimalOnly(amountField);
         appointmentCombo.setItems(DataStore.getInstance().getUnpaidAppointments());
         appointmentCombo.setConverter(new StringConverter<>() {
+
             @Override
             public String toString(Appointment a) {
                 if (a == null) return "";
                 Patient p = DataStore.getInstance().getPatientById(a.getPatientId());
                 String name = p != null ? p.getFullName() : "Paciente desconocido";
                 return name + "  ·  " + a.getDate().format(DATE_FMT) + " " + a.getTime().format(TIME_FMT)
-                        + "  ·  " + a.getReason();
+                        + "  ·  " + a.getReason() + "  ·  " + CURRENCY.format(a.getValue());
             }
             @Override
             public Appointment fromString(String string) { return null; }

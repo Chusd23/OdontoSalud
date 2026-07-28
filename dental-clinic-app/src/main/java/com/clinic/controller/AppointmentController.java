@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import com.clinic.util.FieldFormatters;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,6 +20,7 @@ public class AppointmentController {
     @FXML private TextField dentistField;
     @FXML private TextField reasonField;
     @FXML private Label statusLabel;
+    @FXML private TextField valueField;
 
     @FXML private TableView<Appointment> appointmentsTable;
     @FXML private TableColumn<Appointment, String> colPatient;
@@ -37,6 +38,7 @@ public class AppointmentController {
     public void initialize() {
         patientCombo.setItems(DataStore.getInstance().getPatients());
         dateField.setValue(java.time.LocalDate.now());
+        FieldFormatters.decimalOnly(valueField);
 
         colPatient.setCellValueFactory(d -> {
             Patient p = DataStore.getInstance().getPatientById(d.getValue().getPatientId());
@@ -67,6 +69,13 @@ public class AppointmentController {
             showStatus("La hora debe tener el formato HH:mm, ej: 14:30.", true);
             return;
         }
+        double value;
+        try {
+            value = valueField.getText().isBlank() ? 0 : Double.parseDouble(valueField.getText().trim());
+        } catch (NumberFormatException e) {
+            showStatus("El valor de la cita debe ser numérico.", true);
+            return;
+        }
 
         DataStore.getInstance().addAppointment(
                 patientCombo.getValue().getId(),
@@ -74,7 +83,8 @@ public class AppointmentController {
                 time,
                 dentistField.getText().trim(),
                 reasonField.getText().trim(),
-                "Programada"
+                "Programada",
+                value
         );
 
         showStatus("Cita agendada correctamente.", false);
@@ -87,6 +97,7 @@ public class AppointmentController {
         timeField.clear();
         dentistField.clear();
         reasonField.clear();
+        valueField.clear();
     }
 
     private void showStatus(String message, boolean isError) {

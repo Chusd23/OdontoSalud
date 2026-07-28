@@ -148,9 +148,9 @@ public class DataStore {
     public ObservableList<Appointment> getAppointments() { return appointments; }
 
     public Appointment addAppointment(int patientId, LocalDate date, LocalTime time,
-                                       String dentist, String reason, String status) {
+                                       String dentist, String reason, String status, double value) {
         Appointment a = new Appointment(appointmentIdSeq.getAndIncrement(), patientId, date, time,
-                dentist, reason, status);
+                dentist, reason, status, value);
         appointments.add(a);
         return a;
     }
@@ -280,13 +280,12 @@ public class DataStore {
     }
 
     private void seedAppointments() {
-        Appointment a1 = addAppointment(1, LocalDate.now().plusDays(3), LocalTime.of(9, 30),
-                "Dr. Andrés Torres", "Control de resina", "Programada");
-        Appointment a2 = addAppointment(2, LocalDate.now().plusDays(5), LocalTime.of(11, 0),
-                "Dra. Camila Restrepo", "Segunda sesión de endodoncia", "Programada");
-        Appointment a3 = addAppointment(3, LocalDate.now().minusDays(10), LocalTime.of(15, 0),
-                "Dr. Andrés Torres", "Primera valoración", "Completada");
-        a3.setPaid(true);
+    	Appointment a1 = addAppointment(1, LocalDate.now().plusDays(3), LocalTime.of(9, 30),
+    	        "Dr. Andrés Torres", "Control de resina", "Programada", 80000);
+    	Appointment a2 = addAppointment(2, LocalDate.now().plusDays(5), LocalTime.of(11, 0),
+    	        "Dra. Camila Restrepo", "Segunda sesión de endodoncia", "Programada", 150000);
+    	Appointment a3 = addAppointment(3, LocalDate.now().minusDays(10), LocalTime.of(15, 0),
+    	        "Dr. Andrés Torres", "Primera valoración", "Completada", 60000);
     }
 
     private void seedPayments() {

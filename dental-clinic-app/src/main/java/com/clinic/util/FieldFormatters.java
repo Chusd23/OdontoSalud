@@ -24,4 +24,17 @@ public final class FieldFormatters {
         });
         field.setTextFormatter(formatter);
     }
+    public static void decimalOnly(TextField field) {
+        TextFormatter<String> formatter = new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.isEmpty()) {
+                return change;
+            }
+            if (newText.matches("\\d{0,10}(\\.\\d{0,2})?")) {
+                return change;
+            }
+            return null;
+        });
+        field.setTextFormatter(formatter);
+    }
 }

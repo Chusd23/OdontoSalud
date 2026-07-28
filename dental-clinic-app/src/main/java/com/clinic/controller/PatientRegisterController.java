@@ -41,6 +41,7 @@ public class PatientRegisterController {
         bloodTypeCombo.setItems(FXCollections.observableArrayList(
                 "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"));
         FieldFormatters.numericOnly(docNumberField, 15);
+        FieldFormatters.numericOnly(phoneField, 10);
 
         colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colDoc.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(

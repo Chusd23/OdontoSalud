@@ -12,9 +12,10 @@ public class Appointment {
     private String reason;
     private String status;
     private boolean paid;
+    private double value;
 
     public Appointment(int id, int patientId, LocalDate date, LocalTime time,
-                        String dentist, String reason, String status) {
+                        String dentist, String reason, String status, double value) {
         this.id = id;
         this.patientId = patientId;
         this.date = date;
@@ -23,6 +24,7 @@ public class Appointment {
         this.reason = reason;
         this.status = status;
         this.paid = false;
+        this.value = value;
     }
 
     public int getId() { return id; }
@@ -35,4 +37,5 @@ public class Appointment {
     public void setStatus(String status) { this.status = status; }
     public boolean isPaid() { return paid; }
     public void setPaid(boolean paid) { this.paid = paid; }
+    public double getValue() { return value; }
 }

@@ -59,6 +59,10 @@
                     <Label text="Motivo de la cita" styleClass="field-label"/>
                     <TextField fx:id="reasonField" promptText="Ej: Control de resina"/>
                 </VBox>
+                <VBox spacing="4" GridPane.rowIndex="2" GridPane.columnIndex="0">
+				    <Label text="Valor de la cita (COP) *" styleClass="field-label"/>
+				    <TextField fx:id="valueField" promptText="Ej: 80000"/>
+				</VBox>
             </GridPane>
 
             <Label fx:id="statusLabel" styleClass="hint-label" visible="false" managed="false"/>
