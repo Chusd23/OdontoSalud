@@ -194,6 +194,12 @@ public class DataStore {
         for (Patient p : patients) if (p.getId() == id) return p;
         return null;
     }
+    public boolean patientExistsByDocNumber(String docNumber) {
+        for (Patient p : patients) {
+            if (p.getDocNumber().equalsIgnoreCase(docNumber.trim())) return true;
+        }
+        return false;
+    }
 
     public ObservableList<Appointment> getAppointmentsByDate(LocalDate date) {
         ObservableList<Appointment> result = FXCollections.observableArrayList();

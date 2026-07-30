@@ -61,6 +61,17 @@ public class PatientRegisterController {
             showStatus("Completa los campos obligatorios (*).", true);
             return;
         }
+        if (DataStore.getInstance().patientExistsByDocNumber(docNumberField.getText().trim())) {
+            showStatus("Ya existe un paciente registrado con ese número de documento.", true);
+            return;
+        }
+        if (birthDatePicker.getValue() != null) {
+            int age = java.time.Period.between(birthDatePicker.getValue(), java.time.LocalDate.now()).getYears();
+            if (age < 0 || age > 120) {
+                showStatus("La fecha de nacimiento debe corresponder a una edad entre 0 y 120 años.", true);
+                return;
+            }
+        }
 
         DataStore.getInstance().addPatient(
                 namesField.getText().trim(),
